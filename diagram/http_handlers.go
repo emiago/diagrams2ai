@@ -3,7 +3,7 @@ package diagram
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"net/http"
 )
 

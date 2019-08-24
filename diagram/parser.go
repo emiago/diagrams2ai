@@ -3,7 +3,7 @@ package diagram
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"strings"
 )
 

@@ -4,8 +4,9 @@ import (
 	"diagrams2ai/rasa"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type SimpleResponse struct {

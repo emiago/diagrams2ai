@@ -5,17 +5,34 @@ import (
 	"diagrams2ai/config"
 	"diagrams2ai/diagram"
 	"diagrams2ai/storage"
-	"log"
 	"net/http"
 	"os"
 	"os/user"
 
 	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
+	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
 
 var (
 	CONFIGURATION_FILE = "/etc/diagrams2ai"
 )
+
+func init() {
+	formatter := new(prefixed.TextFormatter)
+	formatter.ForceFormatting = true
+	formatter.FullTimestamp = true
+	formatter.TimestampFormat = "2006-01-02 15:04:05"
+
+	formatter.SetColorScheme(&prefixed.ColorScheme{
+		DebugLevelStyle: "blue+h",
+		PrefixStyle:     "cyan",
+	})
+
+	log.SetFormatter(formatter)
+	log.SetOutput(os.Stdout)
+	log.SetLevel(log.DebugLevel)
+}
 
 func main() {
 	if _, err := os.Stat(CONFIGURATION_FILE); err == nil {
@@ -34,7 +51,7 @@ func main() {
 	}
 
 	// Current User
-	log.Println("Hi " + user.Name + " (id: " + user.Uid + ")")
+	log.Println("You are starting process as " + user.Name + " (id: " + user.Uid + ")")
 	// originsOk := handlers.AllowedOrigins([]string{"*"})
 	// methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"})
 	// headersOk := handlers.AllowedHeaders([]string{"Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"})

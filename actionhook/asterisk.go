@@ -2,7 +2,8 @@ package actionhook
 
 import (
 	"diagrams2ai/rasa"
-	"log"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func AsteriskDialChannel(m rasa.CustomAction) (r rasa.CustomActionResponse) {

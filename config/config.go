@@ -7,16 +7,22 @@ import (
 )
 
 var (
-	Conf *Config
-	// Save *SaveConf //Just for faster access
+	Conf   *Config
+	Save   *SaveConfig   //Just for faster access
+	Logger *LoggerConfig //Just for faster access
 )
 
 type SaveConfig struct {
 	RootDir string
 }
 
+type LoggerConfig struct {
+	RootDir string
+}
+
 type Config struct {
-	Save *SaveConfig `json:"save"`
+	Save   *SaveConfig   `json:"save"`
+	Logger *LoggerConfig `json:"logger"`
 	//Add other Conf
 }
 
@@ -29,11 +35,18 @@ func (c *SaveConfig) GetRasaDir() string {
 }
 
 //Create default configuration
-func Init() {
+func init() {
+	Save = &SaveConfig{
+		RootDir: "save",
+	}
+
+	Logger = &LoggerConfig{
+		RootDir: "", //StdOut by default
+	}
+
 	Conf = &Config{
-		Save: &SaveConfig{
-			RootDir: "save",
-		},
+		Save:   Save,
+		Logger: Logger,
 	}
 }
 
