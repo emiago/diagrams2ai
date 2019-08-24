@@ -1,0 +1,7 @@
+#!/bin/sh
+
+docker run -it \
+  -v $(pwd):/app \
+  --add-host myhost:172.17.0.1 \
+  rasa/rasa \
+  shell --log-file=out.log

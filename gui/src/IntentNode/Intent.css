@@ -1,0 +1,48 @@
+.intent-node {
+    border:2px solid transparent;
+    /* border-radius: 5px; */
+    background: white;
+    /* overflow-y:auto;  */
+    -webkit-box-shadow: 10px 10px 25px -13px rgba(0,0,0,0.7);
+    -moz-box-shadow: 10px 10px 25px -13px rgba(0,0,0,0.7);
+    box-shadow: 10px 10px 25px -13px rgba(0,0,0,0.7);
+}
+
+.intent-node.active {
+    border-color: blueviolet;
+}
+
+.intent-grid {
+    height: inherit;
+    padding: 5px !important;
+    padding-bottom: 5px !important;
+    overflow: hidden;
+}
+
+.intent-grid > .segment{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    overflow: hidden !important;
+}
+
+.intent-grid .segment.intent-header  {
+    padding-top: 3px;
+    padding-bottom: 0px;
+    /* border-bottom: 1px solid silver; */
+    height: 25px;
+}
+
+.intent-grid .intent-label {
+    width: 100%;
+    font-style: italic;
+    font-weight: bold;
+    font-size: small;
+}
+
+.intent-grid .intent-list {
+    width: 100%;
+    margin-top: 3px;
+    font-size: small;
+    height: 35px;
+    overflow: hidden;
+}

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+docker run \
+  -p 5005:5005 \
+  --add-host myhost:172.17.0.1 \
+  -v $(pwd):/app \
+  rasa/rasa \
+  run -m /app/models --credentials /app/credentials.yml --enable-api --cors "*"

@@ -1,0 +1,8 @@
+dialogflow-auth
+tutorialchatbot-d4db0-0fea9ca7f682.json
+designer/node_modules
+livechat/node_modules
+save
+./save/**
+./rasa/**
+*.sublime*

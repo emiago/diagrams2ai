@@ -1,0 +1,51 @@
+.diagram-canvas {
+	width: 100%;
+	height: 100%;
+	background: #dedede;
+  }
+  
+.diagram-editor {
+position: absolute;
+top: 0;
+right: 0;
+background: white;
+width: 400px;
+height: 100%;
+padding: 10px;
+overflow: auto;
+}
+
+.diagram-editor-header, .ui.header.diagram-editor-header  {
+/* background: #554275;
+color:white; */
+height: var(--designer-nav-height);
+margin: -10px -10px 20px -10px;
+line-height: var(--designer-nav-height);
+border-bottom: 1px #e2e2e2 solid;
+}
+
+.nav-menu {
+margin: 0px !important;
+height: var(--designer-nav-height);
+background: #7a679c !important;
+}
+
+.nav-menu .item{
+color:white !important;
+}
+
+#diagram-container {
+height: calc(100% - var(--designer-nav-height));
+}
+
+.ui.form textarea.we-textarea {
+height: 8em;
+}
+
+.widget-editor-container .ui.message {
+padding: 1em 1em !important;
+}
+
+.we-msg-header {
+font-size: 1em !important;
+}
