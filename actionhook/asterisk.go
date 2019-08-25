@@ -9,7 +9,7 @@ import (
 func AsteriskDialChannel(m rasa.CustomAction) (r rasa.CustomActionResponse) {
 	log.Println("Dialing asterisk channel")
 	r = rasa.CustomActionResponse{
-		Events: []rasa.Event{
+		Events: []rasa.IEvent{
 			// rasa.Event{Event: "text"},
 		},
 

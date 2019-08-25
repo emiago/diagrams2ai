@@ -11,7 +11,7 @@
 # https://rasa.com/docs/rasa/core/actions/#custom-actions/
 
 action_endpoint:
-  url: "http://myhost:5005/action"
+  url: "http://myhost:5000/action"
 
 # Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.

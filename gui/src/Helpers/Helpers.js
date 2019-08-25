@@ -27,3 +27,8 @@ export function loopObject(obj, cb) {
     }
     return res;
 };
+
+export function isAlphanumeric(str) {
+    var patt = /^[0-9a-zA-Z_.-]*$/g;
+    return patt.test(str);
+}

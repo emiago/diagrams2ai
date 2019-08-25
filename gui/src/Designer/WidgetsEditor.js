@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Dropdown, Form, Header, Input, Message, TextArea } from 'semantic-ui-react';
-import { arrayToObject, loopObject, UID } from '../Helpers/Helpers';
+import { arrayToObject, loopObject, UID, isAlphanumeric } from '../Helpers/Helpers';
 import { RasaAction, RasaButton } from "../Rasa/Models";
 import './Designer.css';
 // import _ from 'loadash'
@@ -55,6 +55,9 @@ export class WidgetsEditor extends React.Component {
 
     handleIntentInputChange = (event) => {
         const value = event.target.value;
+        if (!isAlphanumeric(value)) {
+            return;
+        }
         this.setState((state) => {
             state.intent.name = value;
             return state;
@@ -78,7 +81,7 @@ export class WidgetsEditor extends React.Component {
 
         var a = new RasaAction(value, UID());
         if (a.type !== "utter" && a.type !== "utter_buttons") {
-            a.text = e.target.textContent
+            a.text = e.target.textContent;
         }
         this.setAction(a);
     }
@@ -134,11 +137,12 @@ export class WidgetsEditor extends React.Component {
             { key: 'action_listen', value: 'action_listen', text: 'Listen' },
             { key: 'action_restart', value: 'action_restart', text: 'Restart' },
             { key: 'action_default_fallback', value: 'action_default_fallback', text: 'Fallback' },
-            { key: 'action_deactivate_form', value: 'action_deactivate_form', text: 'Deactivate Form' },
-            { key: 'action_default_ask_affirmation', value: 'action_default_ask_affirmation', text: 'Ask Affirmation' },
-            { key: 'action_revert_fallback_events', value: 'action_revert_fallback_events', text: 'Revert Fallback Events' },
-            { key: 'action_default_ask_rephrase', value: 'action_default_ask_rephrase', text: 'Ask to Rephrase Intent' },
+            // { key: 'action_deactivate_form', value: 'action_deactivate_form', text: 'Deactivate Form' },
+            // { key: 'action_default_ask_affirmation', value: 'action_default_ask_affirmation', text: 'Ask Affirmation' },
+            // { key: 'action_revert_fallback_events', value: 'action_revert_fallback_events', text: 'Revert Fallback Events' },
+            // { key: 'action_default_ask_rephrase', value: 'action_default_ask_rephrase', text: 'Ask to Rephrase Intent' },
             { key: 'action_back', value: 'action_back', text: 'Undo Last User Intent' },
+            { key: 'action_agent_handoff', value: 'action_agent_handoff', text: 'Agent Handoff' },
         ]
 
         // const { engine } = this.props;
@@ -148,7 +152,7 @@ export class WidgetsEditor extends React.Component {
                 <Form onSubmit={this.submitHandler}>
                     <Form.Field>
                         <label>Name</label>
-                        <Input key="wname" disabled={node.name === 'default'} placeholder='Name' value={this.state.intent.name} onChange={this.handleIntentInputChange} />
+                        <Input key="wname" disabled={node.name === 'default'} placeholder='Allowed chars [0-9a-zA-Z_.-]' value={this.state.intent.name} onChange={this.handleIntentInputChange} />
                     </Form.Field>
                     <Header size="small">Intents</Header>
                     <Form.Field>
@@ -206,7 +210,7 @@ export class WidgetsEditor extends React.Component {
                                                     return (
                                                         <Form.Field key={"we-field-btn" + action.name + index}>
                                                             <Input placeholder='Title' style={{ width: '50%' }} value={b.title} iaction={action} btn={'title'} index={index} onChange={this.handleActionButtonInputChange} />
-                                                            <Input placeholder='Intent' style={{ width: '50%' }} value={b.payload} iaction={action} btn={'payload'} index={index} onChange={this.handleActionButtonInputChange} />
+                                                            <Input placeholder='Use /intent to fire intent' style={{ width: '50%' }} value={b.payload} iaction={action} btn={'payload'} index={index} onChange={this.handleActionButtonInputChange} />
                                                         </Form.Field>
                                                     )
                                                 })

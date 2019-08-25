@@ -3,8 +3,9 @@ package diagram
 import (
 	"fmt"
 	"io/ioutil"
-	log "github.com/sirupsen/logrus"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func parseDiagramToRasa(m Diagram) string {
@@ -38,6 +39,8 @@ func parseDiagramToRasa(m Diagram) string {
 		for _, a := range n.Actions {
 			if a.Type == "utter" || a.Type == "utter_buttons" {
 				domain += fmt.Sprintf("- utter_%s\n", a.Name)
+			} else {
+				domain += fmt.Sprintf("- %s\n", a.Type)
 			}
 		}
 	}
@@ -47,13 +50,14 @@ func parseDiagramToRasa(m Diagram) string {
 
 	for _, n := range m.Nodes {
 		for _, a := range n.Actions {
-			domain += fmt.Sprintf("  utter_%s:\n", a.Name)
 			if a.Type == "utter" {
+				domain += fmt.Sprintf("  utter_%s:\n", a.Name)
 				for _, osen := range a.Texts {
 					domain += fmt.Sprintf("  - text: \"%s\"\n", osen)
 				}
 				domain += "\n"
 			} else if a.Type == "utter_buttons" {
+				domain += fmt.Sprintf("  utter_%s:\n", a.Name)
 				domain += fmt.Sprintf("  - text: \"%s\"\n", a.Text)
 				domain += fmt.Sprintf("    buttons:\n")
 				for _, b := range a.Buttons {
@@ -73,7 +77,7 @@ func parseDiagramToRasa(m Diagram) string {
 	for _, n := range m.Nodes {
 		inport := n.GetInPort()
 		outport := n.GetOutPort()
-		if len(inport.Links) == 0 && len(outport.Links) > 0 {
+		if len(inport.Links) == 0 && len(outport.Links) >= 0 {
 			//This is starting point of story
 			startingNodes = append(startingNodes, n)
 		}

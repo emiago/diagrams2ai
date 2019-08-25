@@ -10,6 +10,6 @@ type CustomAction struct {
 }
 
 type CustomActionResponse struct {
-	Events    []Event    `json:"events"`
+	Events    []IEvent   `json:"events"`
 	Responses []Response `json:"responses"`
 }

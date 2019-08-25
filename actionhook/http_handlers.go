@@ -47,17 +47,20 @@ func ActionHookHandler(w http.ResponseWriter, r *http.Request) {
 		res = AsteriskDialChannel(m)
 	case "action_connect_agent":
 		res = AsteriskDialChannel(m)
+	case "action_default_fallback":
+		res = AgentHandoff(m)
 	}
 
 	// RasaParseAndSave(m, body)
 
+	log.Printf("Responding with %+v\n", res)
 	// Use NLP
 	respondJSON(w, res)
 }
 
 func RasaActionTextResponse(s string) rasa.CustomActionResponse {
 	return rasa.CustomActionResponse{
-		Events: []rasa.Event{
+		Events: []rasa.IEvent{
 			// rasa.Event{Event: "text"},
 		},
 
@@ -70,7 +73,7 @@ func RasaActionTextResponse(s string) rasa.CustomActionResponse {
 func ActionConnectAgent(m rasa.CustomAction) (r rasa.CustomActionResponse) {
 	log.Println("Dialing asterisk channel")
 	r = rasa.CustomActionResponse{
-		Events: []rasa.Event{
+		Events: []rasa.IEvent{
 			// rasa.Event{Event: "text"},
 		},
 
