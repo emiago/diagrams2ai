@@ -3,13 +3,14 @@ package diagram
 import (
 	"bytes"
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"os"
 	"os/exec"
 	"os/user"
 	"strings"
 	"sync"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/otiai10/copy"
 )
@@ -103,7 +104,7 @@ func RasaTrainModel(id string, modeldir string) error {
 	// cmd.Path
 	// cmd.Stdin = strings.NewReadwer("some input")
 	// var out bytes.Buffer
-	f, err := os.OpenFile(modeldir+"/out.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(modeldir+"/train.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal("Failed to open out.log file", err)
 	}

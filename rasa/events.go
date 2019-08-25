@@ -25,7 +25,7 @@ func NewEventFollowUp(name string) EventFollowUp {
 	return e
 }
 
-func NewEventPause(name string) Event {
+func NewEventPause() Event {
 	e := Event{Event: "pause"}
 	return e
 }

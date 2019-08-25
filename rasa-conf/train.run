@@ -1,9 +1,12 @@
 #!/bin/sh
 
 docker run \
+  --user $(id -u):$(id -g) \
   -v $(pwd):/app \
   rasa/rasa:latest \
   train \
     --domain domain.yml \
     --data data \
     --out models
+
+sudo chown $USER -R ./models 
