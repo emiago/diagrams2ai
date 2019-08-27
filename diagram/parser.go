@@ -122,6 +122,8 @@ func parseDiagramToRasa(m Diagram) string {
 	// log.Println("")
 
 	// log.Printf("stories %d\n%s", len(sp.stories), stories)
+	endpoints := SetupEndpointData(m)
+
 	modeldir := RasaGetModelDir(m.Id)
 	RasaInitModel(modeldir)
 
@@ -137,7 +139,20 @@ func parseDiagramToRasa(m Diagram) string {
 		log.Println(err)
 	}
 
+	if err := ioutil.WriteFile(modeldir+"/endpoints.yml", []byte(endpoints), 0644); err != nil {
+		log.Println(err)
+	}
+
 	// RasaTrainModel(modeldir)
 	log.Println("Configuration completed", modeldir)
 	return modeldir
+}
+
+func SetupEndpointData(m Diagram) string {
+	data := `#Automaticaly generated
+action_endpoint:
+  url: %s
+`
+	data = fmt.Sprintf(data, "http://myhost:5000/action?model="+m.Id)
+	return data
 }

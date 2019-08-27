@@ -62,7 +62,11 @@ func main() {
 	router.HandleFunc("/model/train", corsHandler(diagram.ModelTrainHandler))
 	router.HandleFunc("/model/run", corsHandler(diagram.ModelRunHandler))
 
+	router.HandleFunc("/model/data/save", corsHandler(diagram.ModelDataSaveHandler))
+	router.HandleFunc("/model/data/load", corsHandler(diagram.ModelDataLoadHandler))
+
 	router.HandleFunc("/action", corsHandler(actionhook.ActionHookHandler))
+
 	log.Println("Started listening...")
 	// handlers.
 	// log.Fatal(http.ListenAndServe(":5000", handlers.CORS(originsOk, headersOk)(router)))

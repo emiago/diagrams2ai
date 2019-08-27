@@ -1,10 +1,12 @@
 package diagram
 
 import (
+	"diagrams2ai/dbmodel"
 	"encoding/json"
 	"io/ioutil"
-	log "github.com/sirupsen/logrus"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type SimpleResponse struct {
@@ -18,7 +20,7 @@ func respondJSON(w http.ResponseWriter, response interface{}) {
 }
 
 func ModelsListHandler(w http.ResponseWriter, r *http.Request) {
-	models, err := ModelsList()
+	models, err := dbmodel.AllModels()
 
 	if err != nil {
 		log.Println("Loading models list failed", err)
@@ -82,7 +84,7 @@ func ModelLoadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data, _ := ModelDataGet(m.Id)
+	data, _ := dbmodel.Get(m.Id)
 
 	raw := json.RawMessage(content)
 	model := Model{
@@ -153,4 +155,59 @@ func ModelRunHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	respondJSON(w, model)
+}
+
+func ModelDataSaveHandler(w http.ResponseWriter, r *http.Request) {
+	//POST method, receives a json to parse
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "Error reading request body",
+			http.StatusInternalServerError)
+		return
+	}
+
+	log.Println("Saving model data")
+	var m *dbmodel.Data = &dbmodel.Data{}
+	if err := json.Unmarshal(body, m); err != nil {
+		log.Println(err, m.Id)
+		http.Error(w, "Failed to parse model", http.StatusInternalServerError)
+		return
+	}
+
+	// log.Println(m)
+
+	if err := m.Save(); err != nil {
+		log.Println(err, m.Id)
+		http.Error(w, "Failed to save model", http.StatusInternalServerError)
+		return
+	}
+	// Use NLP
+	respondJSON(w, SimpleResponse{"Model Saved"})
+}
+
+func ModelDataLoadHandler(w http.ResponseWriter, r *http.Request) {
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "Error reading request body", http.StatusInternalServerError)
+		return
+	}
+
+	m := struct {
+		Id string `json:"id"`
+	}{}
+
+	err = json.Unmarshal(body, &m)
+	if err != nil {
+		http.Error(w, "Failed to parse id", http.StatusBadRequest)
+		return
+	}
+
+	data, err := dbmodel.Get(m.Id)
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Failed to parse model output "+m.Id, http.StatusInternalServerError)
+		return
+	}
+
+	respondJSON(w, data)
 }

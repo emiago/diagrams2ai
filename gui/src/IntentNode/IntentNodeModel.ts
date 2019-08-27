@@ -65,12 +65,18 @@ export class IntentNodeModel extends NodeModel {
 		this.actions = arr;
 	}
 
+	addAction(a: RasaAction) {
+		this.actions.push(a);
+	}
+
 }
 
 export class IntentFallbackNodeModel extends IntentNodeModel {
 	constructor() {
-		super("default");
+		super("fallback");
 		this.intent.type = "fallback";
-		// this.name = "default";
+		var a = new RasaAction("action_default_fallback", "action_default_fallback");
+		a.text = "Fallback";
+		this.addAction(a)
 	}
 }

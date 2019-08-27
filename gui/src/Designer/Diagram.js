@@ -20,6 +20,7 @@ import { Backend } from '../Backend';
 import queryString from 'query-string';
 import "storm-react-diagrams/dist/style.min.css";
 import './Designer.css';
+import { RasaAction } from '../Rasa/Models';
 
 function EditorHeader(props) {
     return <Header size="large" className="diagram-editor-header" textAlign="center">{props.children}</Header>
@@ -124,7 +125,6 @@ export class Dashboard extends React.Component {
 
         var fallback = new IntentFallbackNodeModel();
         fallback.setPosition(50, 50);
-        fallback.setActionTexts(["I do not understand.", "Please say again"]);
 
         var mynode1 = new IntentNodeModel("Greetings");
         mynode1.setPosition(500, 50);

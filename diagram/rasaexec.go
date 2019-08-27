@@ -2,6 +2,7 @@ package diagram
 
 import (
 	"bytes"
+	"diagrams2ai/dbmodel"
 	"fmt"
 	"os"
 	"os/exec"
@@ -120,7 +121,7 @@ func RasaTrainModel(id string, modeldir string) error {
 	return nil
 }
 
-func RasaRunModel(m *ModelData, modeldir string) (rerr error) {
+func RasaRunModel(m *dbmodel.Data, modeldir string) (rerr error) {
 	// os.Exit(1)
 	// return
 	runmutex.Lock()

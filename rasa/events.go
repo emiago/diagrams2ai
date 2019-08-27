@@ -29,3 +29,8 @@ func NewEventPause() Event {
 	e := Event{Event: "pause"}
 	return e
 }
+
+func NewEventRevind() Event {
+	e := Event{Event: "rewind"}
+	return e
+}

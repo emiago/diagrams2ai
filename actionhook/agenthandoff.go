@@ -6,7 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func AgentHandoff(m rasa.CustomAction) (r rasa.CustomActionResponse) {
+func AgentHandoff(m CustomAction) (r rasa.CustomActionResponse) {
 	log.Println("Running agent handoff")
 	r = rasa.CustomActionResponse{
 		Events: []rasa.IEvent{
