@@ -16,24 +16,10 @@ import { IntentFallbackNodeModel, IntentNodeModel } from "../IntentNode/IntentNo
 import { IntentPortModel } from "../IntentNode/IntentPortModel";
 import { SimplePortFactory } from "../IntentNode/SimplePortFactory";
 import { WidgetsEditor } from './WidgetsEditor';
+import { Backend } from '../Backend';
 import queryString from 'query-string';
 import "storm-react-diagrams/dist/style.min.css";
 import './Designer.css';
-// const queryString = require('query-string');
-
-function httpjson(uri, params, method = 'POST') {
-    return fetch("http://localhost:5000" + uri, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(params)
-    });
-}
-
-function ajaxpost(uri, params) {
-    return httpjson(uri, params, 'POST').then(res => res.json())
-}
 
 function EditorHeader(props) {
     return <Header size="large" className="diagram-editor-header" textAlign="center">{props.children}</Header>
@@ -58,6 +44,8 @@ export class Dashboard extends React.Component {
             selectednode: null,
         }
 
+        this.backend = new Backend();
+
         var self = this;
 
         const parsed = queryString.parse(window.location.search);
@@ -65,7 +53,7 @@ export class Dashboard extends React.Component {
         this.setupModelListeners();
 
         if (parsed.model) {
-            httpjson("/model/load", { id: parsed.model }).then(
+            this.backend.http("/model/load", { id: parsed.model }, "POST").then(
                 (result) => {
                     if (!result.ok) {
                         console.log("Loading model failed");
@@ -171,7 +159,7 @@ export class Dashboard extends React.Component {
             saveinfo: "Parsing Diagram ...",
         });
 
-        ajaxpost("/model/save", savemodel).then(
+        this.backend.post("/model/save", savemodel).then(
             (result) => {
                 console.log("Saving modell success", result);
                 this.setState({
@@ -203,7 +191,7 @@ export class Dashboard extends React.Component {
             training: true,
             saveinfo: "Training model ...",
         });
-        ajaxpost("/model/train", jsm).then(
+        this.backend.post("/model/train", jsm).then(
             (result) => {
                 console.log("Training modell success", result);
                 // this.setState({
@@ -233,7 +221,7 @@ export class Dashboard extends React.Component {
         });
 
         this.setIntentNodeActive("");
-        ajaxpost("/model/run", jsm).then(
+        this.backend.post("/model/run", jsm).then(
             (result) => {
                 console.log("Training modell success", result);
                 this.setState((state) => {
