@@ -1,12 +1,23 @@
-# diagrams2ai
+# diagrams2ai (IN DEVELOPMENT)
 
-Simple way of building chatbot by connecting diagrams to make a different stories.
-Goal is to give easy way for building chatbots without just adding bunch of intents and actions, which can be very complex.
+Simple way of building chatbot by connecting diagram nodes to make a different stories.
+Goal is to create easier way for building chatbots without just adding bunch of intents and actions, which can be very complex.
 
 ## How it works
 
-From GUI you built different chatbot stories by connecting diagrams. 
-Each diagram represents intent, and actions for that intent.
+You can built, train, run and chat straight away from GUI. It also allows you to have different models built.
+
+### Editing
+
+Diagram nodes represent different intents in your story. Each intent has different actions and this can be all configured in widget editor.
+
+![](d2ai-edit.gif)
+
+### Interactive chat
+
+Chat is added for testing, but also while you speak it marks current active intent. This helps for debuging your stories.
+
+![](d2ai-chat.gif)
 
 
 ## Getting Started
@@ -54,10 +65,9 @@ yarn start
 ```
 
 
-
 ## Deployment
 
-This is not for production, but you could use it to built startup Rasa models and then copy paste to your production enviroment. There you can do additionaly configuration and train with rasa, or you can just use this model as it is.
+This is not for production, but you could use it to built startup Rasa models and then copy paste to your chatbot in production. There you can do additionaly configuration and train with rasa, or you can just use this model as it is.
 
 By default you should see them: 
 ```
@@ -66,15 +76,12 @@ By default you should see them:
 
 ## Built With
 
-* [RASA](https://rasa.com/) - Rasa as machine learning
+* [RASA](https://rasa.com/) - RASA for training and running chatbots
 * [ReactJS](https://reactjs.org/) - The web framework used
 * [GO](https://golang.org/) - Go for backend server
 
-## Contributing
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
 
