@@ -42,8 +42,9 @@ export class WidgetsEditor extends React.Component {
 
     deleteAction(name) {
         this.setState((state) => {
-            delete state.actions[name];
 
+            delete state.actions[name];
+            console.log("deleting action", name, state.actions);
             // for (var x in state.actions) {
             //     if (state.actions[x].name === name) {
             //         state.actions.splice(x, 1);
@@ -123,7 +124,7 @@ export class WidgetsEditor extends React.Component {
 
     submitHandler() {
         console.log("SUBMIT");
-        var res = this.state;
+        var res = { ...this.state };
         res.actions = Object.values(res.actions);
         this.props.onSubmit(res);
     }

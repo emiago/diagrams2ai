@@ -89,6 +89,7 @@ export class IntentNodeWidget extends React.Component<IntentNodeWidgetProps, Int
 						<div className='intent-label'>Intents:</div>
 						<List className='intent-list'>
 							{node.intent.texts.map((text, index) => {
+								if (index > 2) return;
 								return <List.Item key={"insen" + node.id + index}>{text}</List.Item>
 							})}
 						</List>
@@ -97,10 +98,14 @@ export class IntentNodeWidget extends React.Component<IntentNodeWidgetProps, Int
 						<div className='intent-label'>Actions:</div>
 						<List className='intent-list'>
 							{node.actions.map((action, ni) => {
+								if (ni > 1) return;
 								if (action.type === "utter") {
 									return action.texts.map((text, index) => {
+										if (index > 1) return;
 										return <List.Item key={"outsen" + node.id + ni + "" + index}>{text}</List.Item>
 									});
+								} else if (action.text !== "") {
+									return <List.Item key={"outsen" + node.id + ni + ""}>- {action.text}</List.Item>
 								}
 							})}
 						</List>
