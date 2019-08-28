@@ -142,8 +142,8 @@ export class WidgetsEditor extends React.Component {
             // { key: 'action_default_ask_affirmation', value: 'action_default_ask_affirmation', text: 'Ask Affirmation' },
             // { key: 'action_revert_fallback_events', value: 'action_revert_fallback_events', text: 'Revert Fallback Events' },
             // { key: 'action_default_ask_rephrase', value: 'action_default_ask_rephrase', text: 'Ask to Rephrase Intent' },
-            { key: 'action_back', value: 'action_back', text: 'Undo Last User Intent' },
-            { key: 'action_agent_handoff', value: 'action_agent_handoff', text: 'Agent Handoff' },
+            // { key: 'action_back', value: 'action_back', text: 'Undo Last User Intent' },
+            // { key: 'action_agent_handoff', value: 'action_agent_handoff', text: 'Agent Handoff' },
         ]
 
         // const { engine } = this.props;
