@@ -3,6 +3,28 @@
 Simple way of building chatbot by connecting diagram nodes to make a different stories.
 Goal is to create easier way for building chatbots without just adding bunch of intents and actions, which can be very complex.
 
+- [x] Creaing Intent, Adding/Removing multiple actions
+- [x] Parsing diagrams to RASA stories, nlu and domain
+- [x] Saving and training model within GUI
+- [x] Interactive chat for testing and debuging stories
+- [x] Handling multiple models and running containers per bot
+- [x] Utter Responses
+- [x] Custom Fallback Action
+- [x] Utter Buttons Action
+- [ ] Deleting models
+- [ ] Focus on Rasa FormPolicy Actions and slot filling
+- [ ] Making customizable all default Rasa actions
+- [ ] Utter Buttons with intent or custom dropdown search selection
+- [ ] Custom action builder - Creating with unique names and managing custom actions to reduce repeating
+- [ ] Two stage fallback && Agent handoff handling 
+- [ ] Better rasa bot containers handling
+- [ ] More configurable options for backend server like models and data locations
+- [ ] Integrations to be configurable by GUI (Facebook,Slack for start)
+- [ ] Multiline responses
+- [ ] Going into production
+- [ ] More ....
+
+
 ## How it works
 
 You can built, train, run and chat straight away from GUI. It also allows you to have different models built.
