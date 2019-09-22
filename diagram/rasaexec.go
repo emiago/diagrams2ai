@@ -121,21 +121,24 @@ func RasaTrainModel(id string, modeldir string) error {
 	return nil
 }
 
+func RasaStopModel(id string) error {
+	log.Println("Stopping container " + id)
+	cmd := exec.Command("docker", "stop", id)
+	return cmd.Run()
+}
+
 func RasaRunModel(m *dbmodel.Data, modeldir string) (rerr error) {
 	// os.Exit(1)
 	// return
 	runmutex.Lock()
 	defer runmutex.Unlock()
-
-	log.Println("Stopping container " + m.Id)
-	cmd := exec.Command("docker", "stop", m.Id)
-	if err := cmd.Run(); err != nil {
+	if err := RasaStopModel(m.Id); err != nil {
 		log.Println(err)
 	}
 
-	time.Sleep(3 * time.Second)
+	time.Sleep(1 * time.Second)
 
-	cmd = RasaDockerRun("--name", m.Id,
+	cmd := RasaDockerRun("--name", m.Id,
 		"-v", fmt.Sprintf("%s:/app", modeldir),
 		"-p", fmt.Sprintf("%d:5005", m.HttpPort),
 		"--add-host", "myhost:172.17.0.1",

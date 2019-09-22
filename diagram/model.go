@@ -103,3 +103,22 @@ func ModelRun(id string) (model dbmodel.Data, rerr error) {
 	ModelDataSave(&model)
 	return
 }
+
+func ModelDelete(id string) {
+	if err := RasaStopModel(id); err != nil {
+		log.Println("Failed to stop", err)
+	}
+	if err := dbmodel.Delete(id); err != nil {
+		log.Println("Failed to delete from db", err)
+	}
+
+	dir := RasaGetModelDir(id)
+	if err := os.RemoveAll(dir); err != nil {
+		log.Println("Removing rasa dir failed", dir, err)
+	}
+
+	file := GetDiagramFile(id)
+	if err := os.RemoveAll(GetDiagramFile(id)); err != nil {
+		log.Println("Removing diagram file failed", file, err)
+	}
+}

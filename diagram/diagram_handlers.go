@@ -211,3 +211,24 @@ func ModelDataLoadHandler(w http.ResponseWriter, r *http.Request) {
 
 	respondJSON(w, data)
 }
+
+func ModelDeleteHandler(w http.ResponseWriter, r *http.Request) {
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "Error reading request body", http.StatusInternalServerError)
+		return
+	}
+
+	m := struct {
+		Id string `json:"id"`
+	}{}
+
+	err = json.Unmarshal(body, &m)
+	if err != nil {
+		http.Error(w, "Failed to parse id", http.StatusBadRequest)
+		return
+	}
+
+	ModelDelete(m.Id)
+	respondJSON(w, SimpleResponse{"Model Deleted"})
+}

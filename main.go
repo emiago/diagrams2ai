@@ -61,6 +61,7 @@ func main() {
 	router.HandleFunc("/model/load", corsHandler(diagram.ModelLoadHandler))
 	router.HandleFunc("/model/train", corsHandler(diagram.ModelTrainHandler))
 	router.HandleFunc("/model/run", corsHandler(diagram.ModelRunHandler))
+	router.HandleFunc("/model/delete", corsHandler(diagram.ModelDeleteHandler))
 
 	router.HandleFunc("/model/data/save", corsHandler(diagram.ModelDataSaveHandler))
 	router.HandleFunc("/model/data/load", corsHandler(diagram.ModelDataLoadHandler))

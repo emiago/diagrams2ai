@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomePage';
-import { Table } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
 import { Backend } from '../Backend';
 
 export class ModelsList extends React.Component {
@@ -11,12 +11,27 @@ export class ModelsList extends React.Component {
             selectedmodel: "",
             models: [],
         }
+        this.getModelsList()
+    }
+
+    getModelsList() {
         this.backend.get("/models/list").then(
             (result) => {
                 this.setState({ models: result });
             },
             (error) => {
                 console.log("Failed to post new message", error);
+            }
+        );
+    }
+
+    handleModelDelete = (id) => {
+        this.backend.post("/model/delete", { "id": id }).then(
+            (result) => {
+                this.getModelsList();
+            },
+            (error) => {
+                console.log("Failed to delete model", error);
             }
         );
     }
@@ -36,10 +51,12 @@ export class ModelsList extends React.Component {
                     {
                         this.state.models.map((model, index) => {
                             return (
-                                <Table.Row key={model.id} onClick={this.props.onModelSelected.bind(null, model)}>
-                                    <Table.Cell>{model.id}</Table.Cell>
-                                    <Table.Cell>{model.name}</Table.Cell>
-                                    <Table.Cell>Delete</Table.Cell>
+                                <Table.Row key={model.id} >
+                                    <Table.Cell onClick={this.props.onModelSelected.bind(null, model)}>{model.id}</Table.Cell>
+                                    <Table.Cell onClick={this.props.onModelSelected.bind(null, model)}>{model.name}</Table.Cell>
+                                    <Table.Cell >
+                                        <Button onClick={this.handleModelDelete.bind(null, model.id)}>Delete</Button>
+                                    </Table.Cell>
                                 </Table.Row>
                             )
                         })

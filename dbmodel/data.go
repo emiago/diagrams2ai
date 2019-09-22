@@ -65,6 +65,11 @@ func Get(id string) (Data, error) {
 	return d, nil
 }
 
+func Delete(id string) error {
+	cmd := storage.Redis.Del("diagrams:" + id)
+	return cmd.Err()
+}
+
 func (current *Data) SetHttpPort() error {
 	allmodels, err := AllModels()
 	if err != nil {
