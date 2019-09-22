@@ -1,7 +1,9 @@
-# diagrams2ai (IN DEVELOPMENT)
+# diagrams2ai
 
 Simple way of building chatbot by connecting diagram nodes to make a different stories.
 Goal is to create easier way for building chatbots without just adding bunch of intents and actions, which can be very complex.
+
+NOTE: This is in development, it is just experimental for now, code needs to be refactored. 
 
 - [x] Creaing Intent, Adding/Removing multiple actions
 - [x] Parsing diagrams to RASA stories, nlu and domain
@@ -17,9 +19,7 @@ Goal is to create easier way for building chatbots without just adding bunch of 
 - [ ] Custom action builder - Creating with unique names and managing custom actions to reduce repeating
 - [ ] Better rasa bot containers handling
 - [ ] More configurable options for backend server like models and data locations
-- [ ] Integrations to be configurable by GUI (Facebook,Slack for start)
 - [ ] Multiline responses
-- [ ] More ....
 
 
 ## How it works
