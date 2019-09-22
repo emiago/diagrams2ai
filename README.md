@@ -11,17 +11,14 @@ Goal is to create easier way for building chatbots without just adding bunch of 
 - [x] Utter Responses
 - [x] Custom Fallback Action
 - [x] Utter Buttons Action
-- [ ] Deleting models
-- [ ] Focus on Rasa FormPolicy Actions and slot filling
+- [x] Deleting models
 - [ ] Making customizable all default Rasa actions
 - [ ] Utter Buttons with intent or custom dropdown search selection
 - [ ] Custom action builder - Creating with unique names and managing custom actions to reduce repeating
-- [ ] Two stage fallback && Agent handoff handling 
 - [ ] Better rasa bot containers handling
 - [ ] More configurable options for backend server like models and data locations
 - [ ] Integrations to be configurable by GUI (Facebook,Slack for start)
 - [ ] Multiline responses
-- [ ] Going into production
 - [ ] More ....
 
 
